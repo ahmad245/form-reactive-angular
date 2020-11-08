@@ -1,0 +1,65 @@
+* {
+	box-sizing: inherit;
+}
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	background-color: if(map-has-key($body, 'bg-color'), map-get($body, 'bg-color'), #fff);
+	font-size: if(map-has-key($body, 'font-size'), map-get($body, 'font-size'), 13px);
+	font-family: if(map-has-key($body, 'font-family'), map-get($body, 'font-family'), ('Arial', sans-serif));
+}
+
+a {
+	text-decoration: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	transition: background-color 5000s ease-in-out 0s,
+	box-shadow 5000s ease-in-out 0s !important;
+	-webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+	-webkit-text-fill-color: $txt-medium !important;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	opacity: 1 !important;
+	color: $txt-dark;
+}
+::-moz-placeholder { /* Firefox 19+ */
+	opacity: 1 !important;
+	color: $txt-dark;
+}
+:-ms-input-placeholder { /* IE 10+ */
+	opacity: 1 !important;
+	color: $txt-dark;
+}
+:-moz-placeholder { /* Firefox 18- */
+	opacity: 1 !important;
+	color: $txt-dark;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+/* Popup modale de récupération d'identifiants */
+#modalRecupId {
+	display: none;
+	width: 600px;
+}
+
+#modalRecupId .modal-content {
+	padding: 0;
+}
+
+#modalRecupId iframe {
+	border: none;
+	width: 100%;
+	height: 280px;
+}

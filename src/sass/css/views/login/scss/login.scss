@@ -1,0 +1,876 @@
+@charset "UTF-8";
+/* media queries */
+html {
+	height: 100%;
+}
+
+form {
+	height: 100%;
+	width: 100%;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	/* IE10+ CSS styles go here */
+	 header {
+		padding: 100px 0 0 !important;
+	}
+}
+
+a.modal-trigger {
+	color: #facd4e;
+}
+
+/// ---------------- from template lms
+@import "variables";
+@import "global";
+
+html {
+	font-size: 10px;
+}
+
+#page {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	font-size: 1.2rem;
+
+	position: relative;
+
+	border: 1.33rem solid;
+	border-image-slice: 1;
+	border-image-source: linear-gradient(to right, #349fd1, #3460d1);
+}
+
+.small-only {
+	display: block;
+}
+
+.contenu {
+	width: 100%;
+	flex: 1 1 100%;
+	padding: 2rem 0;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	position: relative;
+}
+
+.bg {
+	order: $ordre-flex-sm;
+	width: 100%;
+	display: none;
+
+}
+
+header, footer, main {
+	width: 90%;
+	margin: 0 auto;
+}
+
+
+div.hr {
+	margin: 1.33rem 0;
+}
+
+#logo {
+	width: if(map-has-key($logo, 'width'), map-get($logo, 'width'), 100%);
+	max-width: if(map-has-key($logo, 'max-width'), map-get($logo, 'max-width'), 200px);
+	min-width: if(map-has-key($logo, 'min-width'), map-get($logo, 'min-width'), 100px);
+	text-align: center;
+	margin-bottom: 2.6rem;
+
+	@if (map-has-key($logo, 'align') and  map-get($logo, 'align') == center) {
+		margin-left: auto;
+		margin-right: auto;
+	} @else if (map-has-key($logo, 'align') and  map-get($logo, 'align') == right) {
+		margin-left: auto;
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+		border: 0;
+	}
+}
+
+h2 {
+	margin: 0;
+	@if (map-has-key($h2, 'color')) {
+		color:  map-get($h2, 'color');
+	}
+	@if (map-has-key($h2, 'ff')) {
+		font-family: map-get($h2, 'ff');
+	}
+	@if (map-has-key($h2, 'fw')) {
+		font-weight: map-get($h2, 'fw');
+	}
+	@if (map-has-key($h2, 'fsz')) {
+		font-size: map-get($h2, 'fsz');
+	}
+	@if (map-has-key($h2, 'ls')) {
+		letter-spacing: map-get($h2, 'ls');
+	}
+}
+
+h3 {
+	@if (map-has-key($h3, 'color')) {
+		color:  map-get($h3, 'color');
+	}
+	@if (map-has-key($h3, 'ff')) {
+		font-family: map-get($h3, 'ff');
+	}
+	@if (map-has-key($h3, 'fw')) {
+		font-weight: map-get($h3, 'fw');
+	}
+	@if (map-has-key($h3, 'fsz')) {
+		font-size: map-get($h3, 'fsz');
+	}
+	@if (map-has-key($h3, 'ls')) {
+		letter-spacing: map-get($h3, 'ls');
+	}
+	margin: 0 0 2rem;
+}
+
+.instructions {
+	@if (map-has-key($instructions, 'color')) {
+		color:  map-get($instructions, 'color');
+	}
+	@if (map-has-key($instructions, 'ff')) {
+		font-family: map-get($instructions, 'ff');
+	}
+	@if (map-has-key($instructions, 'fw')) {
+		font-weight: map-get($instructions, 'fw');
+	}
+	@if (map-has-key($instructions, 'fsz')) {
+		font-size: map-get($instructions, 'fsz');
+	}
+	@if (map-has-key($instructions, 'ls')) {
+		letter-spacing: map-get($instructions, 'ls');
+	}
+	@if (map-has-key($instructions, 'lh')) {
+		line-height: map-get($instructions, 'lh');
+	}
+	margin-bottom: 2.5rem;
+}
+
+#fields {
+	box-sizing: border-box;
+	overflow: hidden;
+
+	@if (map-has-key($fields, 'mxw')) {
+		max-width: map-get($fields, 'mxw');
+	}
+	@if (map-has-key($fields, 'shadow-xs')) {
+		box-shadow: map-get($fields, 'shadow-xs');
+	}
+
+	.field {
+		position: relative;
+		background-color: $field-color;
+		margin: 0;
+
+		&:not(:last-child) {
+			margin-bottom: 2rem;
+		}
+
+		@if (map-has-key($field, 'xs') and map-has-key(map-get($field, 'xs'), 'height')) {
+			height: map-get(map-get($field, 'xs'), 'height');
+		}
+
+		@if (map-has-key($field, 'color')) {
+			color: map-get($field, 'color');
+		}
+		border-radius: 3px !important;
+		box-sizing: content-box;
+		&:first-of-type {
+			label {
+				margin-left: 0;
+			}
+			input[type=email],
+			input[type=text],
+			input[type=password] {
+				margin-left: 0;
+				& + span.label {
+					margin-left: 0;
+				}
+			}
+		}
+	}
+
+	label { // images
+		position: absolute;
+		top: 0;
+		left: 0;
+		@if (map-has-key($field, 'xs') and map-has-key(map-get($field, 'xs'), 'height')) {
+			width: map-get(map-get($field, 'xs'), 'height');
+		}
+		height: 100%;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		img {
+			height: 20px;
+			width: auto;
+		}
+	}
+
+	input[type=email],
+	input[type=text],
+	input[type=password] {
+		position: absolute;
+		z-index: 1;
+		bottom: 0;
+		@if (map-has-key($field, 'xs') and map-has-key(map-get($field, 'xs'), 'height')) {
+			left: map-get(map-get($field, 'xs'), 'height');
+		}
+		width: calc(100% - 50px);
+		border: 0;
+		color: $txt-medium;
+		background-color: transparent !important;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		margin-bottom: 0;
+		height: 100% !important;
+		@if (map-has-key($label, 'ff')) {
+			font-family: map-get($label, 'ff') !important;
+		}
+		@if (map-has-key($label, 'fsz')) {
+			font-size: map-get($label, 'fsz') !important;
+		}
+		@if (map-has-key($input, 'fw')) {
+			font-weight: map-get($input, 'fw') !important;
+		}
+		padding-left: 10px;
+		font-family: arial, sans-serif;
+
+		&:focus,
+		&.valid,
+		&.invalid {
+			color: $txt-medium;
+			border: 0;
+			box-shadow: none;
+			outline: 0;
+		}
+
+		& + span.label {
+			position: absolute;
+			text-align: center;
+			@if (map-has-key($field, 'xs') and map-has-key(map-get($field, 'xs'), 'height')) {
+				left: map-get(map-get($field, 'xs'), 'height');
+			}
+			margin-left: 3px;
+			padding-left: 10px;
+			color: $txt-medium-2;
+			top: 50%;
+			-webkit-transform: translateY(-50%);
+			-ms-transform: translateY(-50%);
+			transform: translateY(-50%);
+			transition: transform 0.3s ease;
+
+			@if (map-has-key($label, 'ff')) {
+				font-family: map-get($label, 'ff') !important;
+			}
+			@if (map-has-key($label, 'fsz')) {
+				font-size: map-get($label, 'fsz') !important;
+			}
+			@if (map-has-key($label, 'fw')) {
+				font-weight: map-get($label, 'fw') !important;
+			}
+			font-family: arial, sans-serif;
+			z-index: 1;
+
+			&.active {
+				-webkit-transform: translateY(calc(-50% - 8px));
+				-ms-transform: translateY(calc(-50% - 8px));
+				transform: translateY(calc(-50% - 8px));
+			}
+		}
+
+		/*&.valide + span.validation {
+			&::after {
+				content: ' ';
+				display: block;
+				position: absolute;
+				top: 53%;
+				right: 15px;
+				width: 25px;
+				height: 25px;
+				-webkit-transform: translateY(-50%);
+				-ms-transform: translateY(-50%);
+				transform: translateY(-50%);
+				background: url(../../../img/login/valid.png) no-repeat;
+				background-size: contain;
+			}
+		}*/
+
+		/*&.invalide + span.validation {
+			&::after {
+				content: ' ';
+				display: block;
+				position: absolute;
+				top: 53%;
+				right: 15px;
+				width: 25px;
+				height: 25px;
+				-webkit-transform: translateY(-50%);
+				-ms-transform: translateY(-50%);
+				transform: translateY(-50%);
+				background: url(../../../img/login/invalid.png) no-repeat;
+				background-size: contain;
+			}
+		}*/
+
+		&:focus:not([readonly]) {
+			color: $txt-dark;
+			box-shadow: none;
+			border: 0;
+		}
+	}
+}
+
+.button_form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@if (map-has-key($bouton, 'width')) {
+		width: map-get($bouton, 'width');
+	}@else{
+		width: 15.67rem;
+	}
+
+
+	@if (map-has-key($bouton, 'height')) {
+		height: map-get($bouton, 'height');
+		border-radius: map-get($bouton, 'height')*0.5;
+
+	}@else  {
+		height: 3.73rem;
+		border-radius: 5px;
+	}
+	@if (map-has-key($bouton, 'm')) {
+		margin: map-get($bouton, 'm');
+	}@else  {
+		margin: 10px 0;
+	}
+	@if (map-has-key($bouton, 'bc')) {
+		background-color: map-get($bouton, 'bc');
+	}
+	@if (map-has-key($bouton, 'color')) {
+		color:  map-get($bouton, 'color');
+	}
+	@if (map-has-key($bouton, 'ff')) {
+		font-family: map-get($bouton, 'ff');
+	}
+	@if (map-has-key($bouton, 'fw')) {
+		font-weight: map-get($bouton, 'fw');
+	}
+	@if (map-has-key($bouton, 'fsz')) {
+		font-size: map-get($bouton, 'fsz');
+	}
+	@if (map-has-key($bouton, 'tt')) {
+		text-transform: map-get($bouton, 'tt');
+	}@else{
+		text-transform: uppercase;
+	}
+	@if (map-has-key($bouton, 'ta')) {
+		text-align: map-get($bouton, 'ta');
+	}@else{
+		text-align: center;
+	}
+
+	@if (map-has-key($bouton, 'mxw')) {
+		max-width: map-get($bouton, 'mxw');
+	}
+	-webkit-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+
+	&:hover {
+		@if (map-has-key($bouton-hover, 'bc')) {
+			background-color: map-get($bouton-hover, 'bc');
+			color: $txt-light;
+		}
+		@if (map-has-key($bouton-hover, 'color')) {
+			color:  map-get($bouton-hover, 'color');
+		}
+	}
+	.valign {
+		display: inline-block;
+		vertical-align: middle;
+		margin-top: 4px;
+	}
+
+	.arrow {
+		display: inline-block;
+		vertical-align: middle;
+		width: 1.4rem;
+		height: 2rem;
+		position: relative;
+		margin-left: 2.5rem;
+
+		svg {
+			fill: $txt-light;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	}
+}
+
+#oubli_form {
+
+	@if (map-has-key($oubli, 'm')) {
+		margin: map-get($oubli, 'm');
+	}@else  {
+		margin: 0.67rem 0 0;
+	}
+	@if (map-has-key($oubli, 'mxw')) {
+		max-width: map-get($oubli, 'mxw');
+		margin-left: auto;
+		margin-right: auto;
+	}
+	@if (map-has-key($oubli, 'color')) {
+		color:  map-get($oubli, 'color');
+	}
+	@if (map-has-key($oubli, 'ff')) {
+		font-family: map-get($oubli, 'ff');
+	}
+	@if (map-has-key($oubli, 'fw')) {
+		font-weight: map-get($oubli, 'fw');
+	}
+	@if (map-has-key($oubli, 'fsz')) {
+		font-size: map-get($oubli, 'fsz');
+	}
+	@if (map-has-key($oubli, 'tt')) {
+		text-transform: map-get($oubli, 'tt');
+	}
+	@if (map-has-key($oubli, 'ta')) {
+		text-align: map-get($oubli, 'ta');
+	}@else{
+		text-align: right;
+	}
+
+	a {
+		text-decoration: none;
+		transition: all 0.3s;
+		@if (map-has-key($oubli, 'color')) {
+			color: $couleur-active;
+		}
+		&:hover {
+			@if (map-has-key($bouton-hover, 'bc')) {
+				color: map-get($bouton-hover, 'bc');
+			}
+		}
+	}
+}
+
+/*footer {
+	@if (map-has-key($bouton, 'm')) {
+		margin: map-get($bouton, 'm');
+	}@else{
+		margin: 30px auto 0;
+	}
+	@if (map-has-key($footer, 'color')) {
+		color:  map-get($footer, 'color');
+	}
+	@if (map-has-key($footer, 'ta')) {
+		text-align: map-get($footer, 'ta');
+	}@else{
+		text-align: center;
+	}
+
+	a {
+		color: unset;
+		&:hover {
+			color: $couleur-active;
+		}
+	}
+}*/
+
+@media screen and (min-width: 600px) {
+	#page {
+		padding: 2rem 0;
+		@if (map-has-key($bg, 'bg-md')) {
+			background:  map-get($bg, 'bg-md');
+			background-color: $couleur-active;
+		}@else {
+		}
+
+		background: url(../../../img/login/acceler_bg.png) top right, linear-gradient(to right, #2b296c, #28799e) center center ;
+		background-repeat: no-repeat;
+		-webkit-background-size: 50% auto, cover;
+		background-size: 70% auto, cover;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: -1.33rem;
+			bottom: -1.33rem;
+			left: -1.33rem;
+			right: -1.33rem;
+			background: url(../../../img/login/acceler_particles.png) top right;
+			background-repeat: no-repeat;
+			-webkit-background-size: auto 710px;
+			background-size: auto 710px ;
+			z-index: 1;
+			opacity: .75;
+		}
+	}
+
+	.small-only {
+		display: none;
+	}
+
+	div.hr {
+		margin: 30px 0;
+	}
+
+	.contenu {
+		justify-content: center;
+		height: 75%;
+		flex: 0 0;
+		margin: auto;
+		width: 75%;
+		background-image: none;
+	}
+
+	.bg {
+		display: none;
+	}
+
+	header, main, footer {
+		width: 75%;
+	}
+
+	main {
+		&::after {
+			content: unset;
+		}
+	}
+
+	#fields,
+	.button_form,
+	#oubli_form {
+		margin-left: 0;
+	}
+}
+
+@media screen and (max-width: 959px) and (max-height: 840px) {
+	.bg {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 960px) {
+	html {
+		font-size: 11px;
+	}
+
+	#page {
+		min-height: 100%;
+		display: flex;
+		flex-direction: row;
+		padding: 0;
+		background: url(../../../img/login/acceler_bg.png) top right, linear-gradient(to right, #2b296c, #28799e) center center ;
+		background-repeat: no-repeat;
+		-webkit-background-size: 50% auto, cover;
+		background-size: 70% auto, cover;
+		border-width: 15px;
+	}
+
+
+	.contenu {
+		width: $largeur-contenu-medium;
+		flex: 1 1 $largeur-contenu-medium;
+		height: initial;
+		margin: initial;
+		padding: 2rem 0;
+		position: relative;
+
+		&::before {
+			content: '';
+			background: url(../../../img/login/perso_1.png) no-repeat ;
+			position: absolute;
+			bottom: 15%;
+			right: 0;
+			background-size: contain;
+			width: 550px;
+			height:510px;
+			z-index: 1;
+			transform: translateX(100%);
+			display: none;
+		}
+
+		&::after {
+			content:'';
+			background: url(../../../img/login/perso_2.png) no-repeat top left;
+			-webkit-background-size: contain;
+			background-size: contain;
+			position: absolute;
+			width: 433px;
+			height:253px;
+			top: 0;
+			right: -25px;
+			transform: translateX(50%);
+		}
+	}
+
+	.bg {
+		@if (map-has-key($bg, 'bg')) {
+			background:  map-get($bg, 'bg');
+			background-color: $couleur-active;
+		}
+		@if (map-has-key($bg, 'bgp')) {
+			background-position: map-get($bg, 'bgp');
+		}
+		@if (map-has-key($bg, 'bgsz')) {
+			background-size: map-get($bg, 'bgsz');
+		} @else {
+			background-size: cover;
+		}
+		order: $ordre-flex;
+		display: block;
+		width: $largeur-image-medium;
+		flex: 1 1 $largeur-image-medium;
+		height: initial;
+
+		&::after {
+			content:'';
+			background: url(../../../img/login/perso_3.png) no-repeat top right;
+			-webkit-background-size: contain;
+			background-size: contain;
+			position: absolute;
+			width: 198px;
+			height:198px;
+			bottom: 9%;
+			right: 7rem;
+		}
+	}
+}
+
+@media screen and (min-width: 960px) and (max-height: 800px) {
+	html {
+		font-size: 10px;
+	}
+
+	h3 {
+		font-size: 4.1rem;
+	}
+
+	.contenu {
+		&::before {
+			content: '';
+			background: url(../../../img/login/perso_1.png) no-repeat ;
+			position: absolute;
+			bottom: 15%;
+			right: 0;
+			background-size: contain;
+			width: 400px;
+			height:400px;
+			z-index: 1;
+
+			transform: translateX(100%);
+			display: none;
+		}
+
+		&::after {
+			content:'';
+			background: url(../../../img/login/perso_2.png) no-repeat top left;
+			-webkit-background-size: contain;
+			background-size: contain;
+			position: absolute;
+			width: 400px;
+			height: 170px;
+			top: 0;
+			right: -25px;
+			transform: translateX(50%);
+		}
+	}
+
+	.bg {
+		&::after{
+			width: 140px;
+			height: 140px;
+		}
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	html {
+		font-size: 11px;
+	}
+
+	#page {
+		background: url(../../../img/login/acceler_bg.png) top right, linear-gradient(to right, #2b296c, #28799e) center center ;
+		-webkit-background-size:  70% auto, cover;
+		background-size:  70% auto, cover;
+		background-repeat: no-repeat;
+		border-width: 20px;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: -20px;
+			bottom: -20px;
+			left: -20px;
+			right: -20px;
+			background: url(../../../img/login/acceler_perso_1.png) bottom right;
+			background-repeat: no-repeat;
+			-webkit-background-size: contain;
+			background-size: contain ;
+			z-index: 2;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: -20px;
+			bottom: -20px;
+			left: -20px;
+			right: -20px;
+			background: url(../../../img/login/acceler_particles.png) top right;
+			background-repeat: no-repeat;
+			-webkit-background-size: auto 710px;
+			background-size: auto 710px ;
+			z-index: 1;
+			opacity: .75;
+		}
+	}
+
+	.contenu {
+		width: $largeur-contenu-large;
+		flex: 1 1 $largeur-contenu-large;
+		z-index: 5;
+	}
+
+	.bg {
+		width: $largeur-image-large;
+		flex: 1 1 $largeur-image-large;
+	}
+
+	header, main, footer {
+		width: 80%;
+		max-width: 620px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	header {
+		.hr {
+			margin: 2rem 0 2.87rem;
+		}
+	}
+
+	#fields {
+		@if (map-has-key($fields, 'shadow-lg')) {
+			box-shadow: map-get($fields, 'shadow-lg');
+		}
+
+		.field {
+			@if (map-has-key($field, 'lg') and map-has-key(map-get($field, 'lg'), 'height')) {
+				height: map-get(map-get($field, 'lg'), 'height');
+			}
+		}
+
+		label { // images
+			@if (map-has-key($field, 'lg') and map-has-key(map-get($field, 'lg'), 'height')) {
+				width: map-get(map-get($field, 'lg'), 'height');
+			}
+			img {
+				height: 28px;
+			}
+		}
+
+		input[type=email],
+		input[type=text],
+		input[type=password] {
+			@if (map-has-key($field, 'lg') and map-has-key(map-get($field, 'lg'), 'height')) {
+				left: map-get(map-get($field, 'lg'), 'height');
+			}
+			width: calc(100% - 6.67rem);
+			height: 75px;
+
+			& + span.label {
+				@if (map-has-key($field, 'lg') and map-has-key(map-get($field, 'lg'), 'height')) {
+					left: map-get(map-get($field, 'lg'), 'height');
+				}
+			}
+		}
+	}
+
+	footer {
+		margin-top: 70px;
+	}
+}
+
+@media screen and (min-width: 1600px) {
+	html {
+		font-size: 13px;
+	}
+
+	header, main, footer {
+		width: 90%;
+		max-width: 620px;
+	}
+
+	#page {
+		-webkit-background-size:   1285px auto, cover;
+		background-size:  1285px auto, cover;
+
+	}
+	.contenu {
+		&::before {
+			right: 15%;
+			display: block;
+		}
+	}
+
+	.instructions {
+		max-width: 34.8rem;
+	}
+}
+
+@media screen and (min-width: 1200px) and (max-height: 850px) {
+	html {
+		font-size: 11px;
+	}
+
+	header, main, footer {
+		width: 75%;
+	}
+}
+
+
+@media screen and (max-height: 670px) {
+	#logo {
+		margin-top: 0;
+	}
+
+	.contenu {
+		&::before, &::after {
+			content: none;
+		}
+	}
+}
+
+
+@media all and (-ms-high-contrast: none)  and (max-width: 961px), (-ms-high-contrast: active)  and (max-width: 961px) {
+	#page {
+		background: #2b296c;
+		display: block;
+	}
+}
+
+
+@media all and (-ms-high-contrast: none)  and (min-width: 960px), (-ms-high-contrast: active)  and (min-width: 960px) {
+	#page {
+		min-height: 100vh;
+	}
+	.contenu ,
+	.bg {
+		min-height: 100vh;
+	}
+}
+

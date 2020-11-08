@@ -1,0 +1,118 @@
+// pour afficher l'image
+// à gauche => 0
+// à droite => 1
+$ordre-flex: 1;
+$ordre-flex-sm: 1;
+
+$largeur-image-medium: 35%;
+$largeur-contenu-medium: 100-$largeur-image-medium;
+$largeur-image-large: 52.9%;
+$largeur-contenu-large: 100-$largeur-image-large;
+
+// couleurs
+$couleur-active: #22f3f5;
+$txt-dark: #515867;
+$txt-medium: #707070;
+$txt-medium-2: #707070;
+$txt-light: #fff;
+
+$body: (
+		'bg-color': #2b296c, // 28799e
+		'bg-img-md': url(../images/bg-xs.png),
+		'bg-img': url(../images/bg.png),
+		'font-family' : ('Arial', sans-serif),
+		'font-size': 1rem,
+);
+
+$logo: (
+		'align' : left,
+		'width' : 100%,
+		'max-width' : 15.27rem,
+		'min-width': 100px,
+);
+
+$h2: (
+		'color': #22f3f5,
+		'ff': ('Pulp Display', arial, sans-serif),
+		'fw': bold,
+		'fsz': 5.1rem,
+		'ls': -0.07rem,
+);
+
+$h3: (
+		'color': $txt-light,
+		'ff': ('Pulp Display', arial, sans-serif),
+		'fw': bold,
+		'fsz': 5.1rem,
+		'ls': -0.07rem,
+);
+
+$instructions: (
+		'color': $txt-light,
+		'fsz': 1.47rem,
+		'lh': 1.2,
+);
+
+$bg: ();
+
+$contenu: (
+		'bg-color': rgba(#f5f6f7,0.85),
+);
+
+$bouton: (
+		'color': #164a77,
+		'bc': $couleur-active,
+		'ff': ('Source Sans Pro', arial, sans-serif),
+		'fw': bold,
+		'fsz': 1.34rem,
+		'height': 4.4rem,
+		'm': 3.53rem auto 0 0,
+		'mxw': 17rem,
+);
+
+$bouton-hover: (
+		'bc': #f55980,
+);
+
+$oubli: (
+		'color': $txt-light,
+		'ta': right,
+		'fsz': 1.2rem,
+		'mxw': 34.8rem,
+);
+
+$footer: (
+		'color': #807d85,
+		'ta': left,
+);
+
+
+// ensemble des champs
+$field-color: #fff;
+$field-border: transparent;
+$height-xs: 4.5rem;
+$height-lg: 5.13rem;
+
+$fields: (
+		'border': 0,
+		'mxw': 34.8rem,
+);
+
+$field: (
+		'has-validation' : false,
+		'color': $txt-dark,
+		'xs' : (
+				'height': $height-xs,
+		),
+		'lg': (
+				'height': $height-lg,
+		),
+);
+
+$label : (
+		'fsz': 1.3rem ,
+);
+
+$input: (
+		'fsz': 1.42rem ,
+);

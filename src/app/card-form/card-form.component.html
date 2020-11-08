@@ -1,0 +1,72 @@
+<form [formGroup]="cartForm">
+  <div class="row">
+    <div class="col col-first">
+      <h2>Informations</h2>
+      <fieldset>
+          <div class=" inline-block col-1-1">
+            <div class="field">
+              <app-input
+              [control]="cartForm.controls.name"
+              [field]="nameConfig"
+            ></app-input>
+            </div>
+           
+          </div>
+          <div class="inline-block col-1-1">
+            <div class="field">
+            <app-input
+              [control]="cartForm.controls.email"
+              [field]="emailConfig"
+            ></app-input>
+            </div>
+          </div>
+      </fieldset>
+      <fieldset>
+        <ng-container formGroupName="skills" class="col-1-1">
+          <div class="fields">
+            <div class=" inline-block col-1-2">
+              <div class="field">
+                <app-input
+                [control]="cartForm.get('skills').get('skillName')"
+                [field]="skilllNameConfig"
+              ></app-input>
+              </div>
+            </div>
+            <div class="inline-block col-1-2">
+              <div class="field">
+                <app-input
+                [control]="cartForm.get('skills').get('experienceInYear')"
+                [field]="experienceInYearConfig"
+              ></app-input>
+              </div>
+              
+            </div>
+          </div>
+           
+            <div class="field inline-block ">
+             
+                <app-radio 
+                [field]="proficiencyConfig"
+               
+                [control]="(cartForm.get('skills')).controls.proficiency"
+                [items]="items"
+                
+              ></app-radio>
+              
+            
+             
+            </div>
+           
+        
+        </ng-container>
+      </fieldset>
+    </div>
+  
+  
+    
+    
+  </div>
+  <button type="button" (click)="onloadData()"></button>
+  
+</form>
+
