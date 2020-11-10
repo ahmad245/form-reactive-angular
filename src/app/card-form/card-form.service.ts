@@ -61,7 +61,9 @@ export class CardFormService {
         experienceInYear: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
          proficiency: new FormControl('')
       }),
-      options:new FormArray([])
+      options:new FormArray([ ]),
+      selectItem:new FormControl(1),
+      optionsAll:new FormControl()
     })
   }
 

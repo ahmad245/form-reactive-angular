@@ -5,18 +5,20 @@ import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import {MaterialModule} from '../../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RadioComponent } from './components/radio/radio.component';
-
+import { SelectComponent } from './components/select/select.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
 @NgModule({
-  declarations: [InputComponent, CheckboxComponent, RadioComponent],
+  declarations: [InputComponent, CheckboxComponent, RadioComponent, SelectComponent],
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgSelectModule
     
   ],
-  exports:[InputComponent,CheckboxComponent,RadioComponent,MaterialModule,ReactiveFormsModule]
+  exports:[InputComponent,CheckboxComponent,RadioComponent,MaterialModule,SelectComponent,ReactiveFormsModule,NgSelectModule]
 })
 export class FormModule { }

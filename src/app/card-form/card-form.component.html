@@ -51,7 +51,13 @@
                     <div class=" inline-block col-1-1">
                         <h4 style="font-weight: normal; border-bottom-width: 1px"> Options</h4>
                         <div class="field multi-checks">
-                            <app-checkbox (sendEvent)="onCheckChange($event)" [control]="cartForm.controls.options" [items]="checks"></app-checkbox>
+                            <app-checkbox (sendEvent)="onCheckChangeAll($event)" [control]="cartForm.controls.optionsAll" [item]="checkAll"></app-checkbox>
+
+                        </div>
+                        <div class="field multi-checks">
+                            <ng-container formArrayName="options" *ngFor="let item of checks;let i=index" class="example-margin">
+                                <app-checkbox (sendEvent)="onCheckChange($event)" [item]="item"></app-checkbox>
+                            </ng-container>
 
                         </div>
                     </div>
@@ -61,11 +67,9 @@
             <fieldset>
                 <div class="fields">
                     <div class=" inline-block col-1-1">
-                        <select name="" id="">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                      </select>
+
+
+                        <app-select [optionItem]="'value'" [optionValue]="'id'" [items]="cars" [control]="cartForm.get('selectItem')"></app-select>
                     </div>
                 </div>
             </fieldset>

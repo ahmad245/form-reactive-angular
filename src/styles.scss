@@ -1,4 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import './sass/css/style.scss';
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+//@import "~@ng-select/ng-select/themes/default.theme.css";
+// // ... or 
+@import "~@ng-select/ng-select/themes/material.theme.css";
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.ng-select .ng-select-container:after {
+    border-bottom: thin solid rgba(0, 0, 0, 0) !important;
+    content: '';
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    transition: border-color 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+}
+
+.ng-select.custom::part() .ng-select-container:after {
+    border-bottom: thin solid rgba(0, 0, 0, 0) !important;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-input>input {
+    width: 100%;
+    border: none;
+    color: #464c58;
+    background-color: #F0F0F0;
+    background: #F0F0F0 !important;
+    height: 40px;
+    padding: 0 14px;
+    outline: none;
+    transition: background 0.2s ease;
+    font-size: 13.2px;
+    background: linear-gradient(#F0F0F0, #F0F0F0) no-repeat bottom, linear-gradient(#02abac, #02abac) no-repeat bottom;
+    background-size: 100% 100%, 100% 0%;
+}
+
+.ng-select.ng-select-single .ng-select-container .ng-value-container,
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    z-index: 1000000000000;
+    padding-left: 5px;
+}
+
+.ng-select.ng-select-single .ng-select-container .ng-clear-wrapper {
+    align-self: flex-end;
+    bottom: 15px;
+    z-index: 1000000000000;
+}
+
+.ng-select.ng-select-single .ng-select-container .ng-arrow-wrapper {
+    align-self: flex-end;
+    bottom: 17px;
+    z-index: 1000000000000;
+}

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormArray } from '@angular/forms';
 import { FieldConfig } from '../..';
 
 @Component({
@@ -14,6 +15,7 @@ export class CheckboxComponent implements OnInit {
   @Input() value='' ;
   @Input() class ='';
   @Input() items=[];
+  @Input() item;
 
   @Output() sendEvent=new EventEmitter();
   constructor() { }
@@ -22,7 +24,10 @@ export class CheckboxComponent implements OnInit {
   }
 
   onCheckChange(event){
+    
     this.sendEvent.emit(event);
+  
+  
   }
 
 }

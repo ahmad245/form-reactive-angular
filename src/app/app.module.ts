@@ -7,6 +7,8 @@ import {SheardModule} from './sheard/sheard.module';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -24,7 +26,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
+
     NgxMaskModule,
+    
+
     SheardModule,
 
     BrowserAnimationsModule
