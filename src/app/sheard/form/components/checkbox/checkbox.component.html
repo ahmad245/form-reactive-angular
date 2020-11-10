@@ -1,4 +1,12 @@
-<section class="example-section">
-    <mat-checkbox color="primary" class="example-margin">Check me!</mat-checkbox>
-    <mat-checkbox class="example-margin" [disabled]="true">Disabled</mat-checkbox>
-  </section>
+<!-- <section class="example-section">
+    <mat-checkbox (change)="onCheckChange($event)" color="primary" *ngFor="let item of items" class="example-margin" [value]="item.value">{{item.value}}</mat-checkbox>
+</section>
+ -->
+<ng-container *ngFor="let item of items" class="example-margin">
+    <label class="checkbox">
+        <input (change)="onCheckChange($event)" type="checkbox" [id]="item.value"  [value]="item.value">
+        <div class="container-checkbox"></div>
+       </label>
+
+    <label [for]="item.value">{{item.value}}</label>
+</ng-container>

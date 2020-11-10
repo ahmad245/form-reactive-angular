@@ -1,72 +1,82 @@
+<h1 class="title">
+    Gérer les commandes
+</h1>
 <form [formGroup]="cartForm">
-  <div class="row">
-    <div class="col col-first">
-      <h2>Informations</h2>
-      <fieldset>
-          <div class=" inline-block col-1-1">
-            <div class="field">
-              <app-input
-              [control]="cartForm.controls.name"
-              [field]="nameConfig"
-            ></app-input>
-            </div>
-           
-          </div>
-          <div class="inline-block col-1-1">
-            <div class="field">
-            <app-input
-              [control]="cartForm.controls.email"
-              [field]="emailConfig"
-            ></app-input>
-            </div>
-          </div>
-      </fieldset>
-      <fieldset>
-        <ng-container formGroupName="skills" class="col-1-1">
-          <div class="fields">
-            <div class=" inline-block col-1-2">
-              <div class="field">
-                <app-input
-                [control]="cartForm.get('skills').get('skillName')"
-                [field]="skilllNameConfig"
-              ></app-input>
-              </div>
-            </div>
-            <div class="inline-block col-1-2">
-              <div class="field">
-                <app-input
-                [control]="cartForm.get('skills').get('experienceInYear')"
-                [field]="experienceInYearConfig"
-              ></app-input>
-              </div>
-              
-            </div>
-          </div>
-           
-            <div class="field inline-block ">
-             
-                <app-radio 
-                [field]="proficiencyConfig"
-               
-                [control]="(cartForm.get('skills')).controls.proficiency"
-                [items]="items"
-                
-              ></app-radio>
-              
-            
-             
-            </div>
-           
-        
-        </ng-container>
-      </fieldset>
+    <div class="row">
+        <div class="col col-first">
+
+            <fieldset>
+                <div class=" inline-block col-1-1">
+                    <div class="field">
+                        <app-input [control]="cartForm.controls.name" [field]="nameConfig"></app-input>
+                    </div>
+
+                </div>
+                <div class="inline-block col-1-1">
+                    <div class="field">
+                        <app-input [control]="cartForm.controls.email" [field]="emailConfig"></app-input>
+                    </div>
+                </div>
+
+
+            </fieldset>
+            <fieldset>
+                <ng-container formGroupName="skills" class="col-1-1">
+                    <div class="fields">
+                        <div class=" inline-block col-1-2">
+                            <div class="field">
+                                <app-input [control]="cartForm.get('skills').get('skillName')" [field]="skilllNameConfig"></app-input>
+                            </div>
+                        </div>
+                        <div class="inline-block col-1-2">
+                            <div class="field">
+                                <app-input [control]="cartForm.get('skills').get('experienceInYear')" [field]="experienceInYearConfig"></app-input>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class=" inline-block col-1-1">
+                            <label>Proficiency</label>
+                            <app-radio [control]="cartForm.get('skills').get('proficiency')" [items]="items"></app-radio>
+                        </div>
+                    </div>
+
+                </ng-container>
+            </fieldset>
+
+            <fieldset>
+                <div class="fields">
+                    <div class=" inline-block col-1-1">
+                        <h4 style="font-weight: normal; border-bottom-width: 1px"> Options</h4>
+                        <div class="field multi-checks">
+                            <app-checkbox (sendEvent)="onCheckChange($event)" [control]="cartForm.controls.options" [items]="checks"></app-checkbox>
+
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <div class="fields">
+                    <div class=" inline-block col-1-1">
+                        <select name="" id="">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                      </select>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+
+
+
+
     </div>
-  
-  
-    
-    
-  </div>
-  <button type="button" (click)="onloadData()"></button>
-  
+    <button type="button" class="btn" (click)="onloadData()">onload</button>
 </form>
 
+{{cartForm.value |json}}

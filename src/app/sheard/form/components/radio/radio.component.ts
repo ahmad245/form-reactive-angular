@@ -9,12 +9,13 @@ import { FieldConfig } from '../..';
 })
 export class RadioComponent implements OnInit {
   @Input() field: FieldConfig;
-  @Input() control :FormControl;
+  @Input() control ;
   @Input() id ;
   @Input() name ;
   @Input() value='' ;
   @Input() class ='';
   @Input() items=[];
+
   constructor() { }
 
   ngOnInit(): void {

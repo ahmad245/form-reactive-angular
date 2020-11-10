@@ -1,7 +1,13 @@
+<!-- <mat-radio-group aria-label="Select an option" [formControl]="control">
+    <mat-radio-button *ngFor="let item of items" value="item">{{item}}</mat-radio-button>
+</mat-radio-group> -->
 
- <mat-radio-group [formControl]="control" aria-label="Select an option">
-    <mat-radio-button *ngFor="let item of items"   value="item">{{item}}</mat-radio-button>
-    
 
-  </mat-radio-group> 
 
+<ng-container *ngFor="let item of items">
+    <label class="checkbox">
+      <input type="radio"required="required" [id]="item" [value]="item"  [formControl]="control">
+      <div class="container-checkbox"></div>
+    </label>
+    <label [for]="item" class="required">{{item}}</label>
+</ng-container>

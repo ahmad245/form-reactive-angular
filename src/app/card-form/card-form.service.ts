@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { FieldConfig, Employee } from '../sheard/form';
 @Injectable({
   providedIn: 'root'
@@ -55,11 +55,13 @@ export class CardFormService {
     return new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
       email: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+     
       skills: new FormGroup({
         skillName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
         experienceInYear: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
-        proficiency: new FormControl('advanced')
-      })
+         proficiency: new FormControl('')
+      }),
+      options:new FormArray([])
     })
   }
 
