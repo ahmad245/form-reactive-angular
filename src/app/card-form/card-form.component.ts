@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { FieldConfig } from '../sheard/form';
 import { CardFormService } from './card-form.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-card-form',
@@ -16,51 +17,36 @@ export class CardFormComponent implements OnInit {
     { id: 4, value: 'Audi' },
   ];
   cartForm: FormGroup;
-  nameConfig: FieldConfig;
-  emailConfig: FieldConfig;
-  skilllNameConfig: FieldConfig;
-  proficiencyConfig: FieldConfig;
-  experienceInYearConfig: FieldConfig;
   items = ['bignner', 'intermediate', 'advanced'];
-  checks = [
-    { description: 'descr1', value: 'value1' },
-    { description: 'descr2', value: 'value2' },
-    { description: 'descr3', value: 'value3' },
-  ];
-  checkAll={
-    description: 'checkAll', value: 'all' }
-  ;
+  answer = 'option1';
+  checkAll ='all';
+  checkedList=[];
+  config:{[key:string]:FieldConfig}={};
+
 
   constructor(private fs: CardFormService) {
-    this.cartForm = this.fs.creatForm();
-    //this.getOptions();
   }
   ngOnInit(): void {
-   
-    this.nameConfig = this.fs.nameConfig;
-    this.emailConfig = this.fs.emailConfig;
-    this.skilllNameConfig = this.fs.skilllNameConfig;
-    this.proficiencyConfig = this.fs.proficiencyConfig;
-    this.experienceInYearConfig = this.fs.experienceInYearConfig;
-  }
-  onloadData() {
-    this.cartForm.patchValue({
-      name: this.fs.get().name,
-      email: this.fs.get().email,
-      options:['value3'],
+    of(this.fs.get()).subscribe((observe) => {
+      this.cartForm = this.fs.creatForm(this.fs.setOptionsWithArray.bind(this.fs, this.fs.get().answers, this.fs.get().checks));
+      this.checkedList=observe.checks;
+      this.config = this.fs.config;
+      this.onloadData(observe);
+    })
 
+  }
+  onloadData(objData) {
+    this.cartForm.patchValue({
+      name: objData.name,
+      email: objData.email,
       skills: {
-        skillName: this.fs.get().skills.skillName,
-        experienceInYear: this.fs.get().skills.experienceInYear,
-        proficiency: this.fs.get().skills.proficiency,
+        skillName: objData.skills.skillName,
+        experienceInYear: objData.skills.experienceInYear,
+        proficiency: objData.skills.proficiency,
       },
     });
   }
-
-  get options(): FormArray { return this.cartForm.get('options') as FormArray; }
-
   onCheckChange(event) {
-    const formArray: FormArray = this.cartForm.get('options') as FormArray;
     let eventValue;
     let isChecked;
     if (event.target) {
@@ -70,29 +56,27 @@ export class CardFormComponent implements OnInit {
       eventValue = event.source.value;
       isChecked = event.checked;
     }
-
     /* Selected */
     if (isChecked) {
-      // Add a new control in the arrayForm
-      formArray.push(new FormControl(eventValue));
+      
+      this.selectedList.push(eventValue);
     } else {
-    /* unselected */
-      // find the unselected element
-      let i: number = 0;
-
-      formArray.controls.forEach((ctrl: FormControl) => {
-        if (ctrl.value == eventValue) {
-          // Remove the unselected element from the arrayForm
-          formArray.removeAt(i);
+      this.selectedList.forEach((el, i) => {
+        if (el == eventValue) {
+          this.selectedList.splice(i, 1)
           return;
         }
-
-        i++;
       });
+    }
+    if(this.selectedList.length===0){
+      this.cartForm.get('optionsAll').setValue(false);
+    }
+    if(this.selectedList.length===this.checkedList.length){
+      this.cartForm.get('optionsAll').setValue(true);
     }
   }
 
-  onCheckChangeAll(event){
+  onCheckChangeAll(event) {
     
     const formArray: FormArray = this.cartForm.get('options') as FormArray;
     let eventValue;
@@ -104,24 +88,33 @@ export class CardFormComponent implements OnInit {
       eventValue = event.source.value;
       isChecked = event.checked;
     }
-    if(isChecked){
+    if (isChecked) {
+      formArray.controls.forEach((controll)=>{
+        controll.setValue(true);
+      });
+      this.selectedList=[];
+      this.selectedList=[...this.checkedList];
 
+    }else{
+      formArray.controls.forEach((controll)=>{
+        controll.setValue(false);
+      })
+      this.selectedList=[];
     }
+    console.log('checkedList',this.checkedList);
+    console.log('selectedList',this.selectedList);
+    
   }
-  addFormControl(i,item){
-    const formArray: FormArray = this.cartForm.get('options') as FormArray;
-    let control=new FormControl()
-    formArray.push(control);
-    return control
+  get options(): FormArray { return this.cartForm.get('options') as FormArray; }
+  get checks() { return this.fs.checks;}
+  get selectedList() {return this.fs.selectedList;}
+  set selectedList(list){this.fs.selectedList=list; }
+
+
+  get questionOptions() {
+    return  (this.cartForm.get('questionOptions') as FormArray).controls;
   }
-  getOptions(){
-    const formArray: FormArray = this.cartForm.get('options') as FormArray;
-    for (const item of this.checks) {
-      let control=new FormControl()
-      formArray.push(control);
-  
-      
-    }
-   
+  addOptions(){
+    (this.cartForm.get('questionOptions') as FormArray).push(this.fs.getGroupOtions())
   }
 }

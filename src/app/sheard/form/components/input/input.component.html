@@ -1,6 +1,6 @@
 
     <label for="">{{field.label}}</label>
-    <input [required]="checkRequired()" type="text"  [formControl]="control">
+    <input [required]="checkRequired()" [type]="field.inputType"    [formControl]="control">
    
    <ng-container  *ngFor="let validation of field.validations">
     <mat-hint *ngIf="control.hasError(validation.name) && control.touched && control.dirty" align="end">{{validation.message}}</mat-hint>

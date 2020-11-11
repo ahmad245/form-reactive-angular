@@ -21,5 +21,8 @@ export interface Validator {
             experienceInYear:string,
             proficiency:string
 
-        }
+        };
+        checks:string[],
+        answers:string[]
+
     }

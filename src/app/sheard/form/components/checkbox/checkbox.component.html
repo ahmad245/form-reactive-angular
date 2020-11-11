@@ -1,5 +1,5 @@
 <label class="checkbox">
-        <input     (change)="onCheckChange($event)" type="checkbox" [id]="item?.value"  [value]="item?.value">
+        <input [formControl]="control" class="checkbox-background"    (change)="onCheckChange($event)" type="checkbox" [id]="item"  [value]="item">
         <div class="container-checkbox"></div>
        </label>
-<label [for]="item?.value">{{item?.value}}</label>
+<label [for]="item">{{item}}</label>

@@ -8,13 +8,13 @@
             <fieldset>
                 <div class=" inline-block col-1-1">
                     <div class="field">
-                        <app-input [control]="cartForm.controls.name" [field]="nameConfig"></app-input>
+                        <app-input [control]="cartForm.controls.name" [field]="config.nameConfig"></app-input>
                     </div>
 
                 </div>
                 <div class="inline-block col-1-1">
                     <div class="field">
-                        <app-input [control]="cartForm.controls.email" [field]="emailConfig"></app-input>
+                        <app-input [control]="cartForm.controls.email" [field]="config.emailConfig"></app-input>
                     </div>
                 </div>
 
@@ -25,12 +25,12 @@
                     <div class="fields">
                         <div class=" inline-block col-1-2">
                             <div class="field">
-                                <app-input [control]="cartForm.get('skills').get('skillName')" [field]="skilllNameConfig"></app-input>
+                                <app-input [control]="cartForm.get('skills').get('skillName')" [field]="config.skilllNameConfig"></app-input>
                             </div>
                         </div>
                         <div class="inline-block col-1-2">
                             <div class="field">
-                                <app-input [control]="cartForm.get('skills').get('experienceInYear')" [field]="experienceInYearConfig"></app-input>
+                                <app-input [control]="cartForm.get('skills').get('experienceInYear')" [field]="config.experienceInYearConfig"></app-input>
                             </div>
 
                         </div>
@@ -55,11 +55,14 @@
 
                         </div>
                         <div class="field multi-checks">
-                            <ng-container formArrayName="options" *ngFor="let item of checks;let i=index" class="example-margin">
-                                <app-checkbox (sendEvent)="onCheckChange($event)" [item]="item"></app-checkbox>
-                            </ng-container>
-
+                            <ng-container formArrayName="options" *ngFor="let item of checkedList;let i=index" class="example-margin">
+                                <app-checkbox [control]="options.controls[i]" (sendEvent)="onCheckChange($event)" [item]="item"></app-checkbox>
+                            </ng-container>                            
                         </div>
+                    </div>
+                    <div class="field">
+                        <mat-hint *ngIf="options.hasError('minSelect')" align="end">At least one order must be selected</mat-hint>
+
                     </div>
                 </div>
             </fieldset>
@@ -74,13 +77,55 @@
                 </div>
             </fieldset>
 
+            <fieldset>
+                <div class=" inline-block col-1-1">
+                    <div class="field">
+                        <app-input [control]="cartForm.controls.question" [field]="config.questionConfig"></app-input>
+                    </div>
+                </div>
+
+            </fieldset>
+            <fieldset>
+                
+                    <ng-container formArrayName="questionOptions" *ngFor="let questionOption of questionOptions;let i=index" class="example-margin">
+                        <div class="fields" [formGroupName]="i">
+                            <div class=" inline-block col-1-5">
+                                <div class="field">
+                                    <label class="checkbox">
+                                        <input formControlName="checkOption" class="checkbox-background"  type="checkbox"   >
+                                        <div class="container-checkbox"></div>
+                                       </label>
+                                <label ></label>
+                                  </div>
+                            </div>  
+                            
+                            <div class=" inline-block col-1-2">
+                                <div class="field">
+                                    <input type="text" formControlName="optionText">
+                                </div>
+                            </div>   
+                        </div>
+                        
+                        <fieldset>
+                            <div class=" inline-block col-1-1">
+                                <div class="field">
+                                    <button type="button" (click)="addOptions()">Add Options </button>
+                                </div>
+                            </div>
+            
+                        </fieldset>
+                    </ng-container>                            
+            
+            </fieldset>
+
         </div>
 
 
 
 
     </div>
-    <button type="button" class="btn" (click)="onloadData()">onload</button>
+    <!-- <button type="button" class="btn" (click)="onloadData()">onload</button> -->
 </form>
 
 {{cartForm.value |json}}
+{{cartForm.valid }}
