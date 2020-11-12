@@ -5,6 +5,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -17,14 +18,16 @@ import {MatRadioModule} from '@angular/material/radio';
     MatInputModule,
     MatCheckboxModule,
     MatIconModule,
-    MatRadioModule
+    MatRadioModule,
+    MatButtonModule
   ],
   exports:[
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
     MatIconModule,
-    MatRadioModule
+    MatRadioModule,
+    MatButtonModule
   ]
 })
 export class MaterialModule { }

@@ -153,4 +153,8 @@ export class CardFormComponent implements OnInit {
        return;
      }
   }
+
+  remove(index){
+    (this.cartForm.get('questionOptions') as FormArray).removeAt(index);
+  }
 }
