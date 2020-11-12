@@ -8,13 +8,13 @@
             <fieldset>
                 <div class=" inline-block col-1-1">
                     <div class="field">
-                        <app-input [control]="cartForm.controls.name" [field]="config.nameConfig"></app-input>
+                        <app-input [id]="'name'" [control]="cartForm.controls.name" [field]="config.nameConfig"></app-input>
                     </div>
 
                 </div>
                 <div class="inline-block col-1-1">
                     <div class="field">
-                        <app-input [control]="cartForm.controls.email" [field]="config.emailConfig"></app-input>
+                        <app-input [id]="'email'" [control]="cartForm.controls.email" [field]="config.emailConfig"></app-input>
                     </div>
                 </div>
 
@@ -25,12 +25,12 @@
                     <div class="fields">
                         <div class=" inline-block col-1-2">
                             <div class="field">
-                                <app-input [control]="cartForm.get('skills').get('skillName')" [field]="config.skilllNameConfig"></app-input>
+                                <app-input [id]="'skillName'" [control]="cartForm.get('skills').get('skillName')" [field]="config.skilllNameConfig"></app-input>
                             </div>
                         </div>
                         <div class="inline-block col-1-2">
                             <div class="field">
-                                <app-input [control]="cartForm.get('skills').get('experienceInYear')" [field]="config.experienceInYearConfig"></app-input>
+                                <app-input [id]="'experienceInYear'" [control]="cartForm.get('skills').get('experienceInYear')" [field]="config.experienceInYearConfig"></app-input>
                             </div>
 
                         </div>
@@ -51,12 +51,12 @@
                     <div class=" inline-block col-1-1">
                         <h4 style="font-weight: normal; border-bottom-width: 1px"> Options</h4>
                         <div class="field multi-checks">
-                            <app-checkbox (sendEvent)="onCheckChangeAll($event)" [control]="cartForm.controls.optionsAll" [item]="checkAll"></app-checkbox>
+                            <app-checkbox (sendEvent)="onCheckChangeAll($event)" [control]="cartForm.controls.optionsAll" [item]="checkAll" [id]="checkAll"></app-checkbox>
 
                         </div>
                         <div class="field multi-checks">
                             <ng-container formArrayName="options" *ngFor="let item of checkedList;let i=index" class="example-margin">
-                                <app-checkbox [control]="options.controls[i]" (sendEvent)="onCheckChange($event)" [item]="item" [value]="item"></app-checkbox>
+                                <app-checkbox [control]="options.controls[i]" (sendEvent)="onCheckChange($event)" [item]="item" [value]="item" [id]="item+''+i"></app-checkbox>
                             </ng-container>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
             <fieldset>
                 <div class=" inline-block col-1-1">
                     <div class="field">
-                        <app-input [control]="cartForm.controls.question" [field]="config.questionConfig"></app-input>
+                        <app-input [id]="'question'" [control]="cartForm.controls.question" [field]="config.questionConfig"></app-input>
                     </div>
                 </div>
 
@@ -91,13 +91,13 @@
                     <div class="fields" [formGroup]="questionOptions[i]">
                         <div class=" inline-block col-1-10">
                             <div class="field">
-                                <app-checkbox (sendEvent)="onCheckAnswer($event)" [control]="questionOptions[i].get('checkOption')" [item]="''" [value]="questionOptions[i].get('optionText').value"></app-checkbox>
+                                <app-checkbox (click)="onClickCheck( $event,questionOptions[i].get('optionText').value)" (sendEvent)="onCheckAnswer($event)" [control]="questionOptions[i].get('checkOption')" [item]="''" [value]="questionOptions[i].get('optionText').value" [id]="'option'+i"></app-checkbox>
                             </div>
                         </div>
 
                         <div class=" inline-block col-1-2">
                             <div class="field">
-                                <app-input [placeholder]="'option '+ (i+1)" [control]="questionOptions[i].get('optionText')"></app-input>
+                                <app-input [placeholder]="'option '+ (i+1)" [control]="questionOptions[i].get('optionText')" [id]="'q'+i"></app-input>
 
                                 <!-- <input #check type="text" [placeholder]="'option '+ (i+1)" formControlName="optionText"> -->
                             </div>

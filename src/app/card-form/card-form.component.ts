@@ -119,6 +119,10 @@ export class CardFormComponent implements OnInit {
     (this.cartForm.get('questionOptions') as FormArray).push(this.fs.getGroupOtions())
   }
   onCheckAnswer(event){
+    if(event.target.value ==''){
+      event.preventDefault();
+      return;
+    }
     let eventValue;
     let isChecked;
     if (event.target) {

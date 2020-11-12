@@ -1,5 +1,5 @@
-<label *ngIf="field" for="">{{field.label}}</label>
-<input [placeholder]="placeholder" [value]="value" [required]="checkRequired()" [type]="field ? field.inputType : 'text'" [formControl]="control">
+<label *ngIf="field" [for]="id">{{field.label}}</label>
+<input [placeholder]="placeholder" [id]="id" [value]="value" [required]="checkRequired()" [type]="field ? field.inputType : 'text'" [formControl]="control">
 
 <ng-container *ngIf="field">
     <ng-container *ngFor="let validation of field.validations">
