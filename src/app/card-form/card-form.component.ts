@@ -22,6 +22,7 @@ export class CardFormComponent implements OnInit {
   checkAll ='all';
   checkedList=[];
   config:{[key:string]:FieldConfig}={};
+  answersList=[];
 
 
   constructor(private fs: CardFormService) {
@@ -116,5 +117,36 @@ export class CardFormComponent implements OnInit {
   }
   addOptions(){
     (this.cartForm.get('questionOptions') as FormArray).push(this.fs.getGroupOtions())
+  }
+  onCheckAnswer(event){
+    let eventValue;
+    let isChecked;
+    if (event.target) {
+      eventValue = event.target.value;
+      isChecked = event.target.checked;
+    } else {
+      eventValue = event.source.value;
+      isChecked = event.checked;
+    }
+    /* Selected */
+    if (isChecked) {
+      
+      this.answersList.push(eventValue);
+    } else {
+      this.answersList.forEach((el, i) => {
+        if (el == eventValue) {
+          this.answersList.splice(i, 1)
+          return;
+        }
+      });
+    }
+    console.log(this.answersList);
+    
+  }
+  onClickCheck( event,value){
+     if(value==''){
+       event.preventDefault();
+       return;
+     }
   }
 }

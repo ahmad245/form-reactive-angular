@@ -84,6 +84,7 @@ export class CardFormService {
       optionsAll:new FormControl(),
       question:new FormControl(''),
       questionOptions:new FormArray([
+        this.getGroupOtions(),
         this.getGroupOtions()
       ])
     })

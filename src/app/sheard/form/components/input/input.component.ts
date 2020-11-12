@@ -12,8 +12,9 @@ export class InputComponent implements OnInit {
   @Input() control :FormControl;
   @Input() id ;
   @Input() name ;
-  @Input() value ;
+  @Input() value="" ;
   @Input() class ;
+  @Input() placeholder='' ;
 
   constructor() { }
 

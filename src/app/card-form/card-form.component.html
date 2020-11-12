@@ -56,8 +56,8 @@
                         </div>
                         <div class="field multi-checks">
                             <ng-container formArrayName="options" *ngFor="let item of checkedList;let i=index" class="example-margin">
-                                <app-checkbox [control]="options.controls[i]" (sendEvent)="onCheckChange($event)" [item]="item"></app-checkbox>
-                            </ng-container>                            
+                                <app-checkbox [control]="options.controls[i]" (sendEvent)="onCheckChange($event)" [item]="item" [value]="item"></app-checkbox>
+                            </ng-container>
                         </div>
                     </div>
                     <div class="field">
@@ -86,36 +86,34 @@
 
             </fieldset>
             <fieldset>
-                
-                    <ng-container formArrayName="questionOptions" *ngFor="let questionOption of questionOptions;let i=index" class="example-margin">
-                        <div class="fields" [formGroupName]="i">
-                            <div class=" inline-block col-1-5">
-                                <div class="field">
-                                    <label class="checkbox">
-                                        <input formControlName="checkOption" class="checkbox-background"  type="checkbox"   >
-                                        <div class="container-checkbox"></div>
-                                       </label>
-                                <label ></label>
-                                  </div>
-                            </div>  
-                            
-                            <div class=" inline-block col-1-2">
-                                <div class="field">
-                                    <input type="text" formControlName="optionText">
-                                </div>
-                            </div>   
-                        </div>
-                        
-                        <fieldset>
-                            <div class=" inline-block col-1-1">
-                                <div class="field">
-                                    <button type="button" (click)="addOptions()">Add Options </button>
-                                </div>
+
+                <ng-container formArrayName="questionOptions" *ngFor="let questionOption of questionOptions;let i=index" class="example-margin">
+                    <div class="fields" [formGroup]="questionOptions[i]">
+                        <div class=" inline-block col-1-10">
+                            <div class="field">
+                                <app-checkbox (sendEvent)="onCheckAnswer($event)" [control]="questionOptions[i].get('checkOption')" [item]="''" [value]="questionOptions[i].get('optionText').value"></app-checkbox>
                             </div>
-            
-                        </fieldset>
-                    </ng-container>                            
-            
+                        </div>
+
+                        <div class=" inline-block col-1-2">
+                            <div class="field">
+                                <app-input [placeholder]="'option '+ (i+1)" [control]="questionOptions[i].get('optionText')"></app-input>
+
+                                <!-- <input #check type="text" [placeholder]="'option '+ (i+1)" formControlName="optionText"> -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </ng-container>
+                <fieldset>
+                    <div class=" inline-block col-1-1">
+                        <div class="field">
+                            <button type="button" (click)="addOptions()">Add Options </button>
+                        </div>
+                    </div>
+
+                </fieldset>
             </fieldset>
 
         </div>
@@ -127,5 +125,8 @@
     <!-- <button type="button" class="btn" (click)="onloadData()">onload</button> -->
 </form>
 
-{{cartForm.value |json}}
-{{cartForm.valid }}
+{{cartForm.value |json}} {{cartForm.valid }}
+<!--  <label class="checkbox">
+    <input (click)="onClickCheck( $event,check.value)"  [value]="questionOptions[i].get('optionText').value" [formControl]="questionOptions[i].get('checkOption')" class="checkbox-background"  type="checkbox" (change)="onCheckAnswer($event)"  >
+    <div class="container-checkbox"></div>
+</label> -->
