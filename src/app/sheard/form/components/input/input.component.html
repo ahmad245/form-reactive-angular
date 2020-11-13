@@ -1,9 +1,8 @@
-<label *ngIf="field" [for]="id">{{field.label}}</label>
-<input [placeholder]="placeholder" [id]="id" [value]="value" [required]="checkRequired()" [type]="field ? field.inputType : 'text'" [formControl]="control">
+<label *ngIf="field && field.label" [for]="id">{{field.label}}</label>
+<input [placeholder]="placeholder" [id]="id" [value]="value" [required]="checkRequired()" [type]="field ? field.inputType : 'text'" [formControl]="control" [ngClass]="{'invalid':control.invalid && control.touched && control.dirty}">
 
 <ng-container *ngIf="field">
     <ng-container *ngFor="let validation of field.validations">
         <mat-hint *ngIf="control.hasError(validation.name) && control.touched && control.dirty" align="end">{{validation.message}}</mat-hint>
     </ng-container>
-
 </ng-container>

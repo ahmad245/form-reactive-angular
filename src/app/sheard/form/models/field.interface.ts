@@ -22,7 +22,9 @@ export interface Validator {
             proficiency:string
 
         };
-        checks:string[],
-        answers:string[]
+        checks:string[];
+        answers:string[];
+        questionOptions:string[];
+        questionOptionsAnswer?:string;
 
     }

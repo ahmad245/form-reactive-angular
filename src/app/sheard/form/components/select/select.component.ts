@@ -18,9 +18,13 @@ export class SelectComponent implements OnInit {
   @Input() optionItem;
 
 
-  constructor() { }
+  constructor() { 
+  
+  }
 
   ngOnInit(): void {
+    console.log(this.control);
+    
   }
 
 }

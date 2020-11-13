@@ -70,8 +70,6 @@
             <fieldset>
                 <div class="fields">
                     <div class=" inline-block col-1-1">
-
-
                         <app-select [optionItem]="'value'" [optionValue]="'id'" [items]="cars" [control]="cartForm.get('selectItem')"></app-select>
                     </div>
                 </div>
@@ -97,7 +95,7 @@
 
                         <div class=" inline-block col-1-2">
                             <div class="field">
-                                <app-input [placeholder]="'option '+ (i+1)" [control]="questionOptions[i].get('optionText')" [id]="'q'+i"></app-input>
+                                <app-input [field]="config.optionTextConfig" [placeholder]="'option '+ (i+1)" [control]="questionOptions[i].get('optionText')" [id]="'q'+i"></app-input>
 
                                 <!-- <input #check type="text" [placeholder]="'option '+ (i+1)" formControlName="optionText"> -->
                             </div>
@@ -105,20 +103,20 @@
 
                         <div *ngIf="questionOptions.length > 1" class="inline-block col-1-10">
                             <div class="field">
-                            <button (click)="remove(i)" mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
+                                <button (click)="remove(i)" mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
                                 <mat-icon>close</mat-icon>
                               </button>
                             </div>
                         </div>
                     </div>
-                
+
 
 
                 </ng-container>
                 <fieldset>
                     <div class=" inline-block col-1-1">
                         <div class="field">
-                            <button type="button" (click)="addOptions()">Add Options </button>
+                            <button mat-button color="primary" [disabled]="checkValidOptionText()" type="button" (click)="addOptions()">Add Options </button>
                         </div>
                     </div>
 
@@ -131,10 +129,11 @@
 
 
     </div>
-    <!-- <button type="button" class="btn" (click)="onloadData()">onload</button> -->
+    <button mat-button color="primary" type="button" (click)="onloadData()">onload</button>
 </form>
-
-{{cartForm.value |json}} {{cartForm.valid }}
+{{selectedList|json}}
+<br> {{answersList |json}}
+<br> {{cartForm.value |json}} {{cartForm.valid }}
 <!--  <label class="checkbox">
     <input (click)="onClickCheck( $event,check.value)"  [value]="questionOptions[i].get('optionText').value" [formControl]="questionOptions[i].get('checkOption')" class="checkbox-background"  type="checkbox" (change)="onCheckAnswer($event)"  >
     <div class="container-checkbox"></div>

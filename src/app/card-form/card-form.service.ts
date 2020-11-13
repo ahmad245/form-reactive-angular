@@ -56,6 +56,14 @@ export class CardFormService {
         { name: 'maxlength', message: 'max length', validator: 'minLength' },
       ]
     },
+    optionTextConfig: {
+      name: 'optionText', inputType: 'text',
+      validations: [
+        { name: 'required', message: 'must be required', validator: 'required' },
+        { name: 'minlength', message: 'min length', validator: 'minLength' },
+        { name: 'maxlength', message: 'max length', validator: 'minLength' },
+      ]
+    },
   }
   
   selectedList = [];
@@ -65,11 +73,11 @@ export class CardFormService {
     'option3',
     'option4'
   ];
-
+  answersList=[];
 
   constructor() { }
 
-  creatForm(cb): FormGroup {
+  creatForm(cb?): FormGroup {
     return new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
       email: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
@@ -79,21 +87,21 @@ export class CardFormService {
         experienceInYear: new FormControl('', [Validators.required, Validators.min(0), Validators.max(50)]),
          proficiency: new FormControl('')
       }),
-      options:cb(),
+      options:this.initOptions(),
       selectItem:new FormControl(1),
       optionsAll:new FormControl(),
       question:new FormControl(''),
       questionOptions:new FormArray([
         this.getGroupOtions(),
         this.getGroupOtions()
-      ])
+      ],minSelectedCheckboxes(1,'checkOption'))
     })
   }
 
   getGroupOtions(){
     return  new FormGroup({
       checkOption:new FormControl(false),
-      optionText:new FormControl('')
+      optionText:new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(20)])
     })
   }
 
@@ -112,7 +120,13 @@ export class CardFormService {
         'option3',
         'option4'
       ],
-      answers:['option1','option4']
+      answers:['option1','option4'],
+      questionOptions:[
+        'option 1 for question q',
+        'option 2 for question q',
+        'option 3 for question q'
+      ],
+      questionOptionsAnswer:'option 2 for question q'
     }
     return this.employee;
   }
@@ -124,6 +138,7 @@ export class CardFormService {
     return new FormArray(arr);
   }
   setOptions(value):FormArray{
+    this.selectedList=[];
     const arr = this.checks.map((el) => {
       if(el===value){
         this.selectedList.push(value);
@@ -134,6 +149,7 @@ export class CardFormService {
     return new FormArray(arr);
   }
   setOptionsWithArray(values:string[],data:any[],validationFns:ValidatorFn[]=[minSelectedCheckboxes()]):FormArray{
+    this.selectedList=[];
     const arr = data.map((el) => {
       let element=values.find(value=>value===el)
       if(element){
@@ -144,12 +160,28 @@ export class CardFormService {
     })
     return new FormArray(arr,[...validationFns]);
   }
+
+  setQuestionOption(answer){
+    this.answersList=[]
+     const arr=this.employee.questionOptions.
+     map((option)=>{
+       if(answer===option){
+         this.answersList.push(option);
+       }
+       return new FormGroup({
+        checkOption:new FormControl(answer===option),
+        optionText:new FormControl(option,[Validators.required, Validators.minLength(2), Validators.maxLength(20)])
+       })
+     })
+     return new FormArray(arr);
+  }
 }
-function minSelectedCheckboxes(min = 1) {
+
+function minSelectedCheckboxes(min = 1,formControl='') {
   const validator: ValidatorFn = (formArray: FormArray) => {
     const totalSelected = formArray.controls
       // get a list of checkbox values (boolean)
-      .map(control => control.value)
+      .map(control => formControl !=='' ? control.value[formControl]: control.value)
       // total up the number of checked checkboxes
       .reduce((prev, next) => next ? prev + next : prev, 0);
 
@@ -159,3 +191,5 @@ function minSelectedCheckboxes(min = 1) {
 
   return validator;
 }
+
+

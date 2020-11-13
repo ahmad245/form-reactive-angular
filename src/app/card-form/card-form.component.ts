@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { FieldConfig } from '../sheard/form';
+import { Employee, FieldConfig } from '../sheard/form';
 import { CardFormService } from './card-form.service';
 import { of } from 'rxjs';
 
@@ -22,21 +22,28 @@ export class CardFormComponent implements OnInit {
   checkAll ='all';
   checkedList=[];
   config:{[key:string]:FieldConfig}={};
-  answersList=[];
+ 
 
 
   constructor(private fs: CardFormService) {
   }
   ngOnInit(): void {
-    of(this.fs.get()).subscribe((observe) => {
-      this.cartForm = this.fs.creatForm(this.fs.setOptionsWithArray.bind(this.fs, this.fs.get().answers, this.fs.get().checks));
-      this.checkedList=observe.checks;
-      this.config = this.fs.config;
-      this.onloadData(observe);
-    })
+    this.cartForm = this.fs.creatForm();
+    this.config = this.fs.config;
+    this.checkedList=this.fs.get().checks;
+   
 
   }
-  onloadData(objData) {
+  onloadData() {
+    of(this.fs.get()).subscribe((observe) => {
+        // this.checkedList=observe.checks;
+         this.cartForm.setControl('options',this.fs.setOptionsWithArray(this.fs.get().answers,this.fs.get().checks))
+         this.setFormValue(observe);
+         this.cartForm.setControl('questionOptions',this.fs.setQuestionOption(observe.questionOptionsAnswer))
+       })
+    
+  }
+  setFormValue(objData:Employee){
     this.cartForm.patchValue({
       name: objData.name,
       email: objData.email,
@@ -45,6 +52,7 @@ export class CardFormComponent implements OnInit {
         experienceInYear: objData.skills.experienceInYear,
         proficiency: objData.skills.proficiency,
       },
+      selectItem:3
     });
   }
   onCheckChange(event) {
@@ -69,7 +77,7 @@ export class CardFormComponent implements OnInit {
         }
       });
     }
-    if(this.selectedList.length===0){
+    if(this.selectedList.length!==this.checkedList.length ){
       this.cartForm.get('optionsAll').setValue(false);
     }
     if(this.selectedList.length===this.checkedList.length){
@@ -110,11 +118,8 @@ export class CardFormComponent implements OnInit {
   get checks() { return this.fs.checks;}
   get selectedList() {return this.fs.selectedList;}
   set selectedList(list){this.fs.selectedList=list; }
-
-
-  get questionOptions() {
-    return  (this.cartForm.get('questionOptions') as FormArray).controls;
-  }
+  get questionOptions() {return  (this.cartForm.get('questionOptions') as FormArray).controls;}
+  get answersList(){return this.fs.answersList}
   addOptions(){
     (this.cartForm.get('questionOptions') as FormArray).push(this.fs.getGroupOtions())
   }
@@ -156,5 +161,16 @@ export class CardFormComponent implements OnInit {
 
   remove(index){
     (this.cartForm.get('questionOptions') as FormArray).removeAt(index);
+  }
+
+
+  checkValidOptionText(){
+  const controls=  (this.cartForm.get('questionOptions') as FormArray).controls;
+  for (const control of controls) {
+    if (control.value.optionText==='') {
+      return true;
+    }
+  }
+    return false;
   }
 }
