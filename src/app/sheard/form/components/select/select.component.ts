@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { FieldConfig } from '../..';
 
 @Component({
@@ -16,14 +16,33 @@ export class SelectComponent implements OnInit {
   @Input() items=[];
   @Input() optionValue;
   @Input() optionItem;
+  list=[];
 
-
-  constructor() { 
+  search='';
+  constructor(private renderer: Renderer2) { 
   
   }
 
   ngOnInit(): void {
-    console.log(this.control);
+   this.list=  this.items;
+    
+  }
+  onClick(item:string){
+  this.search=item;
+    this.list= item ==='' ? this.items : this.list.filter(el=>el[this.optionItem].toLowerCase().includes(item.toLowerCase()));
+  
+    
+  }
+  matOPtion(item:string){
+
+    if(this.search==='') return false;
+     return item.toLowerCase().includes(this.search.toLowerCase())
+  }
+  focusInput(input:ElementRef){
+    console.log(input);
+   let element= this.renderer.selectRootElement(input);
+   setTimeout(() => element.focus(), 0);
+   // input.nativeElement.focus();
     
   }
 

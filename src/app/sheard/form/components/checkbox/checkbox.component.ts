@@ -16,6 +16,7 @@ export class CheckboxComponent implements OnInit {
   @Input() class ='';
   @Input() items=[];
   @Input() item;
+  
 
   @Output() sendEvent=new EventEmitter();
   constructor() { }

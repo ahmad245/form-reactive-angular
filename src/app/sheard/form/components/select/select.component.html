@@ -4,10 +4,13 @@
  -->
 
 
-<mat-form-field appearance="fill">
+<mat-form-field (click)="focusInput(input)" appearance="fill">
     <mat-label>Favorite food</mat-label>
-    <mat-select [formControl]="control">
-        <mat-option *ngFor="let item of items" [value]="item[optionValue]">
+    <mat-select (click)="focusInput(input)" [formControl]="control">
+
+        <input #input (input)="onClick($event.target.value)" type="text">
+
+        <mat-option [ngClass]="{'mat-selected':matOPtion(item[optionItem])}" *ngFor="let item of list" [value]="item[optionValue]">
             {{item[optionItem]}}
         </mat-option>
     </mat-select>
