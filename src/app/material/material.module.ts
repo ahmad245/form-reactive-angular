@@ -8,7 +8,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -23,7 +24,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatRadioModule,
     MatButtonModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatExpansionModule,
+    MatMenuModule
   ],
   exports:[
     MatFormFieldModule,
@@ -33,7 +36,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatRadioModule,
     MatButtonModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatExpansionModule,
+    MatMenuModule
   ]
 })
 export class MaterialModule { }

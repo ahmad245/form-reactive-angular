@@ -64,13 +64,17 @@ body {
     z-index: 1000000000000;
 }
 
-
-
-
 .checkbox-background {
     background-color: #ff4081;
     align-items: center;
     display: inline-flex;
     justify-content: center;
-    transition: background-color 90ms cubic-bezier(0, 0, 0.2, 0.1),opacity 90ms cubic-bezier(0, 0, 0.2, 0.1);
+    transition: background-color 90ms cubic-bezier(0, 0, 0.2, 0.1), opacity 90ms cubic-bezier(0, 0, 0.2, 0.1);
+}
+
+///////////////@at-root
+.mat-menu-panel {
+    position: absolute;
+    left: 240px;
+    top: -42px;
 }
