@@ -9,6 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+ 
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   title = 'ReactiveFormReusable';
   hovered=false;
@@ -16,15 +17,28 @@ export class AppComponent {
    
   }
   ngOnInit(): void {
-   console.log( this.trigger);
+ 
+   console.log(this.trigger);
    
-    
+  
   }
   onClick(){
+   
+    this.trigger.closeMenu();
     this.hovered=true;
+    setTimeout(()=>{
+      this.trigger.openMenu();
+    },400)
+    
   }
   onClickBody(){
     this.hovered=false;
+  }
+  menuClosed(){
+    this.hovered=false;
+  }
+  menuOpened(){
+   
   }
  
 }

@@ -42,7 +42,7 @@
 
             </li>
             <li class="list-item " [ngClass]="{'hovered':hovered}">
-                <div (click)="onClick()" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="no-link" title="PARAMÉTRAGE">
+                <div (click)="onClick()" [matMenuTriggerFor]="menu"  (menuClosed)="menuClosed()" aria-label="Example icon-button with a menu" class="no-link" title="PARAMÉTRAGE">
                     <mat-icon>home</mat-icon>
                     <span>PARAMÉTRAGE</span>
                 </div>

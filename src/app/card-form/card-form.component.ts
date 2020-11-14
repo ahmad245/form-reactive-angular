@@ -15,6 +15,7 @@ export class CardFormComponent implements OnInit {
     { id: 2, value: 'Saab' },
     { id: 3, value: 'Opel' },
     { id: 4, value: 'Audi' },
+    { id: 5, value: 'sob' },
   ];
   cartForm: FormGroup;
   items = ['bignner', 'intermediate', 'advanced'];

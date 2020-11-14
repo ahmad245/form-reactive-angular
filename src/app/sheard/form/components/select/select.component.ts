@@ -1,5 +1,6 @@
-import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
 import { FieldConfig } from '../..';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-select',
@@ -17,6 +18,7 @@ export class SelectComponent implements OnInit {
   @Input() optionValue;
   @Input() optionItem;
   list=[];
+  selected=false;
 
   search='';
   constructor(private renderer: Renderer2) { 
@@ -27,16 +29,28 @@ export class SelectComponent implements OnInit {
    this.list=  this.items;
     
   }
-  onClick(item:string){
+  onInput(item:string){
   this.search=item;
     this.list= item ==='' ? this.items : this.list.filter(el=>el[this.optionItem].toLowerCase().includes(item.toLowerCase()));
-  
-    
   }
-  matOPtion(item:string){
-
-    if(this.search==='') return false;
-     return item.toLowerCase().includes(this.search.toLowerCase())
+  matOPtion(item:string,select:MatSelect){
+    if(this.search==='')  return false;
+    // if(select.panel){
+    // let allOption=  select.panel.nativeElement.querySelectorAll('.mat-selected');
+    // if(allOption.length>0){
+    //   console.log(allOption.length);
+    //   allOption.forEach((el,i)=>{
+    //     if(i!==0 ){
+    //       console.log(el.innerText);
+          
+    //       el.classList.remove('mat-selected')
+    //     }
+    //   })
+    // }
+ // }
+    
+    return  item.toLowerCase().includes(this.search.toLowerCase());
+     
   }
   focusInput(input:ElementRef){
     console.log(input);
