@@ -75,18 +75,16 @@ body {
 ///////////////@at-root
 .mat-menu-panel {
     position: absolute;
-    left: 240px;
+    // left: 240px;
     top: -42px;
+    transform: translateX(240px);
+    transition: all 0.5s ease;
 }
 
-
-
 .mat-elevation-z4 {
-
-    transition: left 0.5s ease;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    @include box-shadow-material();
-  
+    transition: transform 0.5s ease;
+    // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    // @include box-shadow-material();
     // box-shadow:none;
     // @include box-shadow-material();
     // box-shadow-left:none ;

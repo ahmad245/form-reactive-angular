@@ -94,8 +94,11 @@ export class CardFormService {
       questionOptions:new FormArray([
         this.getGroupOtions(),
         this.getGroupOtions()
-      ],minSelectedCheckboxes(1,'checkOption'))
+      ],minSelectedCheckboxes(1,'checkOption')),
+      questionTruthyFalsy:new FormControl(),
+      questionEasy:new FormControl('')
     })
+   
   }
 
   getGroupOtions(){
@@ -103,6 +106,15 @@ export class CardFormService {
       checkOption:new FormControl(false),
       optionText:new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(20)])
     })
+  }
+  getGroupTrueFalse(){
+    return  new FormArray([
+      new FormGroup({
+        truthy:new FormControl(),
+        falsy:new FormControl()
+      })
+    ])
+ 
   }
 
   get(){

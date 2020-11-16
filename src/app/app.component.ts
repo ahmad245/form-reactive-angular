@@ -1,7 +1,7 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-root',
@@ -22,13 +22,16 @@ export class AppComponent {
    
   
   }
-  onClick(){
+  onClick(menu:MatMenu){
    
-    this.trigger.closeMenu();
-    this.hovered=true;
-    setTimeout(()=>{
-      this.trigger.openMenu();
-    },400)
+ //  console.log( menu.templateRef.elementRef.nativeElement.classList.add('mat-menu-panel'));
+   
+   
+  //  this.trigger.closeMenu();
+   this.hovered=true;
+    // setTimeout(()=>{
+    //   this.trigger.openMenu();
+    // },400)
     
   }
   onClickBody(){

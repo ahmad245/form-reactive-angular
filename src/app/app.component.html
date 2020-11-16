@@ -42,11 +42,14 @@
 
             </li>
             <li class="list-item " [ngClass]="{'hovered':hovered}">
-                <div (click)="onClick()" [matMenuTriggerFor]="menu"  (menuClosed)="menuClosed()" aria-label="Example icon-button with a menu" class="no-link" title="PARAMÉTRAGE">
+
+                <div (click)="onClick(menu)" [matMenuTriggerFor]="menu" (menuClosed)="menuClosed()" aria-label="Example icon-button with a menu" class="no-link" title="PARAMÉTRAGE">
                     <mat-icon>home</mat-icon>
                     <span>PARAMÉTRAGE</span>
                 </div>
+
                 <mat-menu #menu="matMenu" class="menu_mat">
+
                     <button mat-menu-item>
                       <mat-icon>dialpad</mat-icon>
                       <span>Redial</span>
@@ -59,6 +62,7 @@
                       <mat-icon>notifications_off</mat-icon>
                       <span>Disable alerts</span>
                     </button>
+
                 </mat-menu>
 
             </li>

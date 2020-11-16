@@ -11,11 +11,10 @@ import { of } from 'rxjs';
 })
 export class CardFormComponent implements OnInit {
   cars = [
-    { id: 1, value: 'Volvo' },
-    { id: 2, value: 'Saab' },
-    { id: 3, value: 'Opel' },
-    { id: 4, value: 'Audi' },
-    { id: 5, value: 'sob' },
+    { id: 1, value: 'Multichoise' },
+    { id: 2, value: 'TrueFalse' },
+    { id: 3, value: 'Easy' },
+  
   ];
   cartForm: FormGroup;
   items = ['bignner', 'intermediate', 'advanced'];
@@ -23,7 +22,9 @@ export class CardFormComponent implements OnInit {
   checkAll ='all';
   checkedList=[];
   config:{[key:string]:FieldConfig}={};
- 
+  multiChoise=true;
+  trueFalse=false;
+  easy=false;
 
 
   constructor(private fs: CardFormService) {
@@ -40,6 +41,7 @@ export class CardFormComponent implements OnInit {
         // this.checkedList=observe.checks;
          this.cartForm.setControl('options',this.fs.setOptionsWithArray(this.fs.get().answers,this.fs.get().checks))
          this.setFormValue(observe);
+      //   this.cartForm.setControl('questionOptions',this.fs.setQuestionOption(observe.questionOptionsAnswer))
          this.cartForm.setControl('questionOptions',this.fs.setQuestionOption(observe.questionOptionsAnswer))
        })
     
@@ -173,5 +175,29 @@ export class CardFormComponent implements OnInit {
     }
   }
     return false;
+  }
+
+  onSelectType(event){
+   switch (event) {
+     case 1:
+       this.multiChoise=true;
+       this.trueFalse=false;
+       this.easy=false;
+       break;
+       case 2:
+         this.trueFalse=true;
+         this.multiChoise=false;
+         this.easy=false;
+         break;
+        case 3:
+          this.easy=true;
+          this.trueFalse=false;
+          this.multiChoise=false;
+          
+   
+     default:
+       break;
+   }
+    
   }
 }

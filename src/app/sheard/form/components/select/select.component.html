@@ -6,7 +6,7 @@
 
 <mat-form-field (click)="focusInput(input)" appearance="fill">
     <mat-label>Favorite food</mat-label>
-    <mat-select (click)="focusInput(input)" [formControl]="control" #select>
+    <mat-select (ngModelChange)="onChange($event)" (click)="focusInput(input)" [formControl]="control" #select>
 
         <input #input (input)="onInput($event.target.value)" type="text">
 

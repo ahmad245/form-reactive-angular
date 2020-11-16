@@ -70,7 +70,7 @@
             <fieldset>
                 <div class="fields">
                     <div class=" inline-block col-1-1">
-                        <app-select [optionItem]="'value'" [optionValue]="'id'" [items]="cars" [control]="cartForm.get('selectItem')"></app-select>
+                        <app-select (sendEvent)="onSelectType($event)" [optionItem]="'value'" [optionValue]="'id'" [items]="cars" [control]="cartForm.get('selectItem')"></app-select>
                     </div>
                 </div>
             </fieldset>
@@ -85,8 +85,9 @@
             </fieldset>
             <fieldset>
 
+
                 <ng-container formArrayName="questionOptions" *ngFor="let questionOption of questionOptions;let i=index" class="example-margin">
-                    <div class="fields" [formGroup]="questionOptions[i]">
+                    <div *ngIf="multiChoise" class="fields" [formGroup]="questionOptions[i]">
                         <div class=" inline-block col-1-10">
                             <div class="field">
                                 <app-checkbox (click)="onClickCheck( $event,questionOptions[i].get('optionText').value)" (sendEvent)="onCheckAnswer($event)" [control]="questionOptions[i].get('checkOption')" [item]="''" [value]="questionOptions[i].get('optionText').value" [id]="'option'+i"></app-checkbox>
@@ -113,7 +114,34 @@
 
 
                 </ng-container>
-                <fieldset>
+                <ng-container *ngIf="trueFalse">
+                    <div class="fields">
+                        <label class="checkbox">
+                            <input id="qT" type="radio" required="required"  [value]="true" formControlName="questionTruthyFalsy">
+                            <div class="container-checkbox"></div>
+                          </label>
+                        <label for="qT" class="required">True</label>
+
+                        <label class="checkbox">
+                            <input type="radio"required="required" id="qF" [value]="false" formControlName="questionTruthyFalsy">
+                            <div class="container-checkbox"></div>
+                          </label>
+                        <label for="qF" class="required">False</label>
+                    </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="easy">
+                    <div class="field">
+                        <textarea placeholder="Please Write The Anwser" style="min-height: 60px;" name="" id="" cols="30" rows="30" formControlName="questionEasy"></textarea>
+
+                    </div>
+                </ng-container>
+
+
+
+
+                <fieldset *ngIf="multiChoise">
                     <div class=" inline-block col-1-1">
                         <div class="field">
                             <button mat-button color="primary" [disabled]="checkValidOptionText()" type="button" (click)="addOptions()">Add Options </button>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
 import { FieldConfig } from '../..';
 import { MatSelect } from '@angular/material/select';
 
@@ -21,6 +21,8 @@ export class SelectComponent implements OnInit {
   selected=false;
 
   search='';
+
+  @Output() sendEvent=new EventEmitter();
   constructor(private renderer: Renderer2) { 
   
   }
@@ -58,6 +60,10 @@ export class SelectComponent implements OnInit {
    setTimeout(() => element.focus(), 0);
    // input.nativeElement.focus();
     
+  }
+
+  onChange(event){ 
+    this.sendEvent.emit(event);
   }
 
 }
