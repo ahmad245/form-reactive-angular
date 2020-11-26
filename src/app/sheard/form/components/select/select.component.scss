@@ -3,3 +3,20 @@ input {
     margin: 5px;
     padding: 5px;
 }
+
+.linkLineHover {
+    stroke-width: 8px;
+    stroke: rgba(255, 0, 0, 0);
+}
+
+.linkLine,
+.linkLineHover {
+    shape-rendering: auto;
+    fill: rgb(28, 31, 31);
+    cursor: pointer;
+}
+
+.linkLineHover {
+    stroke-width: 8px;
+    stroke: red;
+}

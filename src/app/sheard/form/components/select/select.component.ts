@@ -1,11 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { FieldConfig } from '../..';
 import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
-  styleUrls: ['./select.component.scss']
+  styleUrls: ['./select.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent implements OnInit {
   @Input() field: FieldConfig;
@@ -23,6 +24,8 @@ export class SelectComponent implements OnInit {
   search='';
 
   @Output() sendEvent=new EventEmitter();
+
+  @ViewChild('select') select:MatSelect;
   constructor(private renderer: Renderer2) { 
   
   }
@@ -37,25 +40,13 @@ export class SelectComponent implements OnInit {
   }
   matOPtion(item:string,select:MatSelect){
     if(this.search==='')  return false;
-    // if(select.panel){
-    // let allOption=  select.panel.nativeElement.querySelectorAll('.mat-selected');
-    // if(allOption.length>0){
-    //   console.log(allOption.length);
-    //   allOption.forEach((el,i)=>{
-    //     if(i!==0 ){
-    //       console.log(el.innerText);
-          
-    //       el.classList.remove('mat-selected')
-    //     }
-    //   })
-    // }
- // }
-    
+  let allOPtion=  this.select.panel?.nativeElement.querySelectorAll('.mat-option')
+    if(allOPtion?.length >1) return false;
     return  item.toLowerCase().includes(this.search.toLowerCase());
      
   }
   focusInput(input:ElementRef){
-    console.log(input);
+   
    let element= this.renderer.selectRootElement(input);
    setTimeout(() => element.focus(), 0);
    // input.nativeElement.focus();
@@ -64,6 +55,33 @@ export class SelectComponent implements OnInit {
 
   onChange(event){ 
     this.sendEvent.emit(event);
+  }
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    
+    
+  }
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+  let allOption=  this.select.panel?.nativeElement.querySelectorAll('.mat-option')
+ 
+  // if(allOption?.length>0){
+  //     allOption.forEach((el,i)=>{     
+  //       if(i!==0){
+  //         el.classList.remove('mat-selected')
+  //       }
+           
+                                
+  //     })
+  //   }
+  }
+  // we will set x,y for line as distance: {x: -97, y: 0} of event
+  //cdkDragMoved emit event evry pixl
+  drop(event){
+    console.log(event);// distance: {x: -97, y: 0}
+    
   }
 
 }
