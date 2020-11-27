@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { FieldConfig } from '../..';
 import { MatSelect } from '@angular/material/select';
+import { CdkDrag, CdkDragDrop, CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-select',
@@ -21,11 +22,16 @@ export class SelectComponent implements OnInit {
   list=[];
   selected=false;
 
+  condition=false;
+
   search='';
+  trans='';
 
   @Output() sendEvent=new EventEmitter();
 
   @ViewChild('select') select:MatSelect;
+  @ViewChild('line') line:ElementRef;
+
   constructor(private renderer: Renderer2) { 
   
   }
@@ -79,9 +85,47 @@ export class SelectComponent implements OnInit {
   }
   // we will set x,y for line as distance: {x: -97, y: 0} of event
   //cdkDragMoved emit event evry pixl
-  drop(event){
-    console.log(event);// distance: {x: -97, y: 0}
+  drop(event:CdkDragDrop<string[]>){
+    console.log(event);
+    
+    
+    
+  // //=event.source.element.nativeElement.style.transform;
+  //   if(event.pointerPosition.x >148 && event.pointerPosition.x <150){
+  //        this.trans=event.source.element.nativeElement.style.transform
+        
+  //       console.log(this.trans);
+        
+  //       }
+  //   if (event.pointerPosition.x > 150) {
+  //     console.log(this.trans);
+  // //    event.source.element.nativeElement.style.transform = this.trans
+  // //     event.pointerPosition.x=150;
+  // //     event.pointerPosition.y=150;
+  //      this.condition=true;
+  // //     event.source.element.nativeElement.style.transform = 'none'      
+  // //     const source: any = event.source
+  // //     source._passiveTransform = { x: 0, y: 0 } // make it so new drag starts from same origin
+  // //     // console.log("drag stopped");
+      
+  // //     // document.dispatchEvent(new Event('mouseup'));
+  //  }else{
+  //   this.condition=false;
+  //   this.line.nativeElement.setAttribute('x1',event.pointerPosition.x );
+  //   this.line.nativeElement.setAttribute('y1',event.pointerPosition.y );
+  // //   console.log( event.source.element.nativeElement.style.transform);// distance: {x: -97, y: 0}
+  // //  console.log(event.pointerPosition.x);
+  // //  console.log(event.source.rootElementSelector);
+   
+  //  }
     
   }
+  onDragEnded(event: CdkDragEnd) {
+
+    
+ //   event.source.element.nativeElement.style.transform = 'none' // visually reset element to its origin
+    const source: any = event.source
+    source._passiveTransform = { x: 10, y: 0 } // make it so new drag starts from same origin
+}
 
 }

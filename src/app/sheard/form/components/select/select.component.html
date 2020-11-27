@@ -16,17 +16,32 @@
     </mat-select>
 </mat-form-field>
 
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="linkBoard" class="" preserveAspectRatio="none">
-    <circle (cdkDragMoved)="drop($event)" cdkDragLockAxis="x" cdkDrag  cx="165" cy="32" r="12" class="rightCase not-selectable occupied"></circle>
-    <circle id="cas_R_6d5cb939-7e88-4bbf-9b7d-b5725d803ef7" cx="165" cy="102" r="12" class="rightCase not-selectable occupied"></circle>
-    <line  class="linkLineHover not-selectable" x1="15" y1="32" x2="165" y2="32"></line>
-    <circle id="B1_44c8ccc7-d0ad-4988-816b-88ff276d77ff.c1041263-0942-4fe4-94aa-cefd9ea3625c" cx="15" cy="32" r="8" class="bowl1 not-selectable"></circle>
-    <circle id="B2_44c8ccc7-d0ad-4988-816b-88ff276d77ff.c1041263-0942-4fe4-94aa-cefd9ea3625c" cx="165" cy="32" r="8" class="bowl2 not-selectable"></circle>
-    <circle id="B1_3ce2c645-dc7e-4e43-acb1-a6cd3a4fe6f6.6d5cb939-7e88-4bbf-9b7d-b5725d803ef7" cx="15" cy="102" r="8" class="bowl1 not-selectable"></circle>
-    <circle id="B2_3ce2c645-dc7e-4e43-acb1-a6cd3a4fe6f6.6d5cb939-7e88-4bbf-9b7d-b5725d803ef7" cx="165" cy="102" r="8" class="bowl2 not-selectable"></circle>
-    <circle id="cas_L_3ce2c645-dc7e-4e43-acb1-a6cd3a4fe6f6" cx="15" cy="102" r="8" class="leftCase not-selectable"></circle>
-    <circle id="cas_L_44c8ccc7-d0ad-4988-816b-88ff276d77ff" cx="15" cy="32" r="8" class="leftCase not-selectable"></circle>
-</svg>
+<div class="svg">
+    <svg #svg cdkDragBoundary="svg" width="180px" height="180px" class="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="linkBoard" class="" preserveAspectRatio="none">
+        <circle id="even"   cx="165" cy="32" r="12"  class=" not-selectable occupied right-first"></circle>
+        <circle  cx="165" cy="32" r="8" class="bowl2 not-selectable"></circle>
+    
+        <line #line   x1="15" y1="32" x2="15" y2="32" class="linkLineHover not-selectable"></line> 
+    
+     
+        <circle   cx="165" cy="102" r="12" class=" not-selectable occupied right-second"  ></circle>
+        <circle  cx="165" cy="102" r="8" class="bowl2 not-selectable"></circle>
+    
+       <circle  cx="15" cy="32" r="8" class=" not-selectable"></circle>
+     
+   
+        <circle  (cdkDragMoved)="drop($event)"    cdkDrag   cx="15" cy="32" r="12" class=" left-top leftCase bowl1 not-selectable"></circle>
+
+     
+
+     
+    
+        <circle  cx="15" cy="102" r="8" class="leftCase not-selectable"></circle>
+        <circle  cx="15" cy="102" r="12" class="left-bottom bowl1 not-selectable"></circle>
+    
+    </svg>
+</div>
+
 <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="linkBoard" class="" preserveAspectRatio="none">
     <circle cdkDragLockAxis="x" cdkDrag  cx="165" cy="32" r="12" class="rightCase not-selectable occupied"></circle>
     <circle id="cas_R_6d5cb939-7e88-4bbf-9b7d-b5725d803ef7" cx="165" cy="102" r="12" class="rightCase not-selectable occupied"></circle>
