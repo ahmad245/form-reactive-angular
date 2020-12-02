@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { FieldConfig } from '../..';
 import { MatSelect } from '@angular/material/select';
-import { CdkDrag, CdkDragDrop, CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragEnd, CdkDragMove } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-select',
@@ -10,6 +10,10 @@ import { CdkDrag, CdkDragDrop, CdkDragEnd, CdkDragMove } from '@angular/cdk/drag
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectComponent implements OnInit {
+
+ 
+
+
   @Input() field: FieldConfig;
   @Input() control ;
   @Input() id ;
@@ -31,7 +35,10 @@ export class SelectComponent implements OnInit {
 
   @ViewChild('select') select:MatSelect;
   @ViewChild('line') line:ElementRef;
-
+  // @HostListener('document:mousemove', ['$event']) 
+  // onMouseMove(e) {
+  //   console.log(e);
+  // }
   constructor(private renderer: Renderer2) { 
   
   }
@@ -85,47 +92,48 @@ export class SelectComponent implements OnInit {
   }
   // we will set x,y for line as distance: {x: -97, y: 0} of event
   //cdkDragMoved emit event evry pixl
-  drop(event:CdkDragDrop<string[]>){
-    console.log(event);
+  drop(event:CdkDragMove,svg){
+    console.log(this.line);
     
-    
-    
-  // //=event.source.element.nativeElement.style.transform;
+  // this.trans=event.source.element.nativeElement.style.transform;
   //   if(event.pointerPosition.x >148 && event.pointerPosition.x <150){
   //        this.trans=event.source.element.nativeElement.style.transform
         
-  //       console.log(this.trans);
-        
   //       }
-  //   if (event.pointerPosition.x > 150) {
-  //     console.log(this.trans);
-  // //    event.source.element.nativeElement.style.transform = this.trans
+     if (event.pointerPosition.x > 150 || event.pointerPosition.y > 150) {
+  //   //  event.event.currentTarget.dispatchEvent('mouse')
+  //   let tra=event.source.element.nativeElement.style.transform;
+  //  let r=  tra.replace('translate3d','')
+  //    .replace('(','')
+  //    .replace(')','')
+  //     console.log(r);
+      
+  //    // event.source.element.nativeElement.classList.add('ah') ;
+  //   //  event.source.element.nativeElement.style.transform = `translate3d(150px, 1px, 0px) `
+  //     event.source.element.nativeElement.style.left="150px";
   // //     event.pointerPosition.x=150;
   // //     event.pointerPosition.y=150;
   //      this.condition=true;
   // //     event.source.element.nativeElement.style.transform = 'none'      
-  // //     const source: any = event.source
-  // //     source._passiveTransform = { x: 0, y: 0 } // make it so new drag starts from same origin
-  // //     // console.log("drag stopped");
+  //      const source: any = event.source
+  //      source._passiveTransform = { x: 0, y: 0 } // make it so new drag starts from same origin
+  //     // console.log("drag stopped");
       
-  // //     // document.dispatchEvent(new Event('mouseup'));
-  //  }else{
-  //   this.condition=false;
-  //   this.line.nativeElement.setAttribute('x1',event.pointerPosition.x );
-  //   this.line.nativeElement.setAttribute('y1',event.pointerPosition.y );
-  // //   console.log( event.source.element.nativeElement.style.transform);// distance: {x: -97, y: 0}
-  // //  console.log(event.pointerPosition.x);
-  // //  console.log(event.source.rootElementSelector);
+  //     // document.dispatchEvent(new Event('mouseup'));
+   }else{
+    this.condition=false;
+    this.line.nativeElement.setAttribute('x1',event.pointerPosition.x );
+    this.line.nativeElement.setAttribute('y1',event.pointerPosition.y );
+  //  event.source.element.nativeElement.style.transform = `${this.trans}`
+  //   console.log( event.source.element.nativeElement.style.transform);// distance: {x: -97, y: 0}
+  //  console.log(event.pointerPosition.x);
+  //  console.log(event.source.rootElementSelector);
    
-  //  }
+   }
+  // event.source.element.nativeElement.style.transform = "translate3d(83px, 1px, 0px); !important"
+  
+
     
   }
-  onDragEnded(event: CdkDragEnd) {
-
-    
- //   event.source.element.nativeElement.style.transform = 'none' // visually reset element to its origin
-    const source: any = event.source
-    source._passiveTransform = { x: 10, y: 0 } // make it so new drag starts from same origin
-}
-
+ 
 }

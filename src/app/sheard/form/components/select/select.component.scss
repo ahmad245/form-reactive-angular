@@ -32,17 +32,18 @@ input {
 }
 
 svg {
-    width: 180px;
-    max-width: 180px;
+    // width: 180px;
+    // max-width: 180px;
     border: dotted #ccc 2px;
-    height: 150px;
+    // height: 150px;
     position: relative;
 }
 
 .svg {
-    width: 180px;
-    height: 150px;
+    // width: 180px;
+    // height: 150px;
     position: relative;
+    transform: translate3d(153px, -2px, 0px);
 }
 
 circle {
@@ -99,4 +100,8 @@ circle {
     height: 25px;
     border-radius: 50%;
     background-color: #2aa6f7;
+}
+
+.ah {
+    transform: translate3d(83px, 1px, 0px) !important;
 }

@@ -11,6 +11,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -28,7 +31,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatAutocompleteModule,
     MatExpansionModule,
     MatMenuModule,
-    DragDropModule
+    DragDropModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   exports:[
     MatFormFieldModule,
@@ -41,7 +47,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatAutocompleteModule,
     MatExpansionModule,
     MatMenuModule,
-    DragDropModule
+    DragDropModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule { }

@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormModule } from './form/form.module';
+import { TableComponent } from './table/table.component';
+import { DataPropertyGetterPipe } from './pipes/data-property-getter.pipe';
 
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TableComponent, DataPropertyGetterPipe],
   imports: [
     CommonModule,
     FormModule,
@@ -14,6 +16,8 @@ import { FormModule } from './form/form.module';
   ],
   exports:[
     FormModule,
+    TableComponent,
+    DataPropertyGetterPipe
     
   ]
 })
