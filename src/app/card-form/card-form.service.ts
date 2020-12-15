@@ -96,7 +96,8 @@ export class CardFormService {
         this.getGroupOtions()
       ],minSelectedCheckboxes(1,'checkOption')),
       questionTruthyFalsy:new FormControl(),
-      questionEasy:new FormControl('')
+      questionEasy:new FormControl(''),
+      rating: new FormControl({value: null, disabled: true}, [Validators.required]),
     })
    
   }
